@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Giuseppe Garbin">
+    <title>Demo 3 - Slidesow responsive con JQuery Cycle 2</title>
+
+    <!-- DEMO TEMPLATE STYLE -->
+    <link href="assets/css/demo.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- CSS -->
+    <style type="text/css">
+
+    /* IMPOSTAZIONI PAGINA DEMO  */
+    body { background: #913D88; color: #FFFFFF; text-align: center;}
+    .navigation { margin:50px 0;  padding:0; font-size: 1.25em; text-align: center; }
+    ul.navigation { list-style:none; }
+    ul.navigation li { display:inline; padding:0 20px 0 0; }
+    ul.navigation li:last-child { padding-right:0; }
+    ul.navigation li a { color:#FFFFFF; text-decoration:none; padding: 10px 25px; border: 1px solid #fff; border-radius: 2px; }
+    ul.navigation li a:hover { background-color:#ffffff; color:#000000; }
+
+    /* SLIDESHOW CONTAINER */
+    .slide-show-container {
+      position: absolute;
+      z-index: -999;
+    }
+    .slide-show-container,
+    .slide-show-container .cycle-slideshow,
+    .slide-show-container .cycle-slideshow .slide {
+      height: 100%;
+      width: 100%;
+    }
+
+    /* SLIDE BACKGROUND - PATTERN */
+    .slide1 {background-image: url('assets/img/pattern1.png');}
+    .slide2 {background-image: url('assets/img/pattern2.png');}
+    .slide3 {background-image: url('assets/img/pattern3.jpg');}
+
+    /* PROGRESS BAR */
+    #progress {
+      position: absolute;
+      top: 0; left: 0;
+      background-color: #FFF;
+      z-index: 999;
+      height: 3px;
+    }
+  </style>
+
+  </head>
+  <body>
+
+  <div class="slide-show-container">
+    <div class="cycle-slideshow"
+      data-cycle-fx="fade"
+      data-cycle-pause-on-hover="false"
+      data-cycle-speed="200"
+      data-cycle-prev="#prev-slide"
+      data-cycle-next="#next-slide"
+      data-cycle-slides=">div"
+      >
+      <div class="slide slide1"></div>
+      <div class="slide slide2"></div>
+      <div class="slide slide3"></div>
+    </div><!-- eo: .slide-show -->
+    <div id="progress"></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Slidesow responsive con JQuery Cycle 2</h1>
+        <h4>Demo 3 - by <a href="http://www.giuseppegarbin.com">Giuseppe Garbin</a></h4>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JSCRIPT -->
+  <script src="assets/js/jquery-1.10.2.min.js"></script>
+  <script src="assets/js/jquery.cycle2.min.js"></script>
+  <script type="text/javascript">
+    var progress = $('#progress'),
+    slideshow = $( '.cycle-slideshow' );
+    slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
+        progress.stop(true).css( 'width', 0 );
+    });
+    slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
+        if ( ! slideshow.is('.cycle-paused') )
+            progress.animate({ width: '100%' }, opts.timeout, 'linear' );
+    });
+  </script>
+
+  </body>
+</html>

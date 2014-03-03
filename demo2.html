@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Giuseppe Garbin">
+    <title>Demo 2 - Slidesow responsive con JQuery Cycle 2</title>
+
+    <!-- DEMO TEMPLATE STYLE -->
+    <link href="assets/css/demo.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- CSS -->
+    <style type="text/css">
+
+    /* IMPOSTAZIONI PAGINA DEMO  */
+    body { background: #913D88; color: #FFFFFF; text-align: center;}
+    .navigation { margin:50px 0;  padding:0; font-size: 1.25em; text-align: center; }
+    ul.navigation { list-style:none; }
+    ul.navigation li { display:inline; padding:0 20px 0 0; }
+    ul.navigation li:last-child { padding-right:0; }
+    ul.navigation li a { color:#FFFFFF; text-decoration:none; padding: 10px 25px; border: 1px solid #fff; border-radius: 2px; }
+    ul.navigation li a:hover { background-color:#ffffff; color:#000000; }
+
+    /* SLIDESHOW CONTAINER */
+    .slide-show-container {
+      position: relative;
+      margin: 50px 0 25px;
+      height: 400px;
+      width: 100%;
+      border: 1px solid #fff;
+      border-radius: 3px;
+    }
+    .slide-show-container .cycle-slideshow,
+    .slide-show-container .cycle-slideshow .slide {
+      height: 400px;
+      width: 100%;
+    }
+
+    /* SLIDE CAPTION  */
+    .slide-caption {
+      height: 400px;
+      padding: 0px 120px;
+      display: table-cell; 
+      vertical-align: middle; 
+    }
+    .slide-caption hr {
+      border: none;
+      border-bottom: 1px dashed #fff;
+    }
+    .slide-caption p {
+      margin-bottom: 25px;
+    }
+    .slide-caption a {
+      color:#FFFFFF;
+      text-decoration:none;
+      padding: 10px 20px;
+      border: 1px solid #fff;
+      font-size: 1.2em;
+      border-radius: 3px;
+    }
+    .slide-caption a:hover {
+      color:#1BA39C;
+      background-color: #FFFFFF;
+    }
+
+    /* NUMERAZIONE SLIDE */
+    #slide-number { 
+      position: absolute; 
+      top: 25px; 
+      width: 400px; 
+      left: 50%; 
+      margin-left: -200px;
+    }
+
+    /* PAGER 
+     * http://tympanus.net/codrops/2014/01/21/dot-navigation-styles/ */
+    #pager { 
+      margin: 0 0 100px; 
+    }
+    .dotstyle ul {
+      position: relative;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      cursor: default;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .dotstyle li {
+      position: relative;
+      display: block;
+      float: left;
+      margin: 0 8px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .dotstyle li a {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border-radius: 50%;
+      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.3);
+      text-indent: -999em; /* make the text accessible to screen readers */
+      cursor: pointer;
+      position: absolute;
+    }
+    .dotstyle li a:focus {
+      outline: none;
+    }
+    .dotstyle-smalldotstroke li {
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0);
+      -webkit-transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease;
+    }
+    .dotstyle-smalldotstroke li a {
+      background-color: rgba(255, 255, 255, 0.5);
+      -webkit-transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .dotstyle-smalldotstroke li a:hover,
+    .dotstyle-smalldotstroke li a:focus,
+    .dotstyle-smalldotstroke li.cycle-pager-active a {
+      background-color: white;
+    }
+    .dotstyle-smalldotstroke li.cycle-pager-active a {
+      -webkit-transform: scale(0.4);
+      transform: scale(0.4);
+    }
+    .dotstyle-smalldotstroke li.cycle-pager-active {
+      box-shadow: 0 0 0 2px white;
+    }
+  </style>
+
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Slidesow responsive con JQuery Cycle 2</h1>
+        <h4>Demo 2 - by <a href="http://www.giuseppegarbin.com">Giuseppe Garbin</a></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="slide-show-container">
+        <div id="slide-number"></div>
+  			  <div class="cycle-slideshow"
+            data-cycle-fx="scrollHorz"
+  			    data-cycle-pause-on-hover="false"
+  			    data-cycle-speed="200"
+  	        data-cycle-prev="#prev-slide"
+  	        data-cycle-next="#next-slide"
+  	        data-cycle-slides=">div"
+            data-cycle-pager="#pager"
+            data-cycle-pager-template="<li><a href=#>{{slideNum}}</a></li>"
+            data-cycle-caption="#slide-number"
+            data-cycle-caption-template="{{slideNum}} / {{slideCount}}"
+  			    >
+  			    <div class="slide">
+              <div class="slide-caption">
+		            <h1 id="title">Animazioni con CSS3 e la proprietà transform</h1>
+                <hr>
+                <p>Con i CSS3 sono state introdotti nuovi metodi e tecniche che danno dinamicità alla pagina web. Infatti, grazie alla proprietà transform è possibile manipolare gli elementi contenuti nella pagina web modificandone l’aspetto, le dimensioni e la posizione. Tutto questo avviene attraverso le funzioni di trasformazione.</p>
+                <a href="http://www.giuseppegarbin.com/blog/post/animazioni-con-css3-e-la-proprieta-transform">Continua a leggere</a>
+              </div>
+  			    </div>
+            <div class="slide">
+              <div class="slide-caption">
+                <h1 id="title">Menu a scomparsa con JQuery slideToggle e CSS</h1>
+                <hr>
+                <p>Grazie alla funzione slideToggle() di JQuery e a poche righe di CSS è possibile realizzare un menu di navigazione a scomparsa semplice e mederno. Quello che descriverò questo post può essere facilmente adattato per molteplici scopi (non solo per menu di navigazione) ed è compatibile sia con i browser più moderni che con le vecchie versioni di IE.</p>
+                <a href="http://www.giuseppegarbin.com/blog/post/menu-a-scomparsa-con-jquery-slidetoggle-e-css">Continua a leggere</a>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="slide-caption">
+                <h1 id="title">Effetti di Instagram con le azioni di Photoshop</h1>
+                <hr>
+                <p>Le azioni di Photoshop, ammettiamolo, ci fanno risparmiare davvero molto tempo quando si tratta di replicare effetti complessi o procedure ripetitive. Oggi vi suggerisco un set di azioni gratuite per Photoshop realizzate da SparkleStock.</p>
+                <a href="http://www.giuseppegarbin.com/blog/post/effetti-di-instagram-con-le-azioni-di-photoshop">Continua a leggere</a>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="slide-caption">
+                <h1 id="title">Impostare un immagine di sfondo a schermo intero</h1>
+                <hr>
+                <p>Ci sono diversi modi per poter dimensionare un’immagine in modo che ricopra perfettamente la dimensione della finestra del browser. Il metodo più semplice, rapido e indolore per raggiungere l’obiettivo è sicuramente utilizzare CSS3.</p>
+                <a href="http://www.giuseppegarbin.com/blog/post/come-impostare-un-immagine-di-sfondo-a-schermo-intero">Continua a leggere</a>
+              </div>
+            </div>
+  			  </div><!-- eo: .slide-show -->
+  			</div>
+        <div class="dotstyle dotstyle-smalldotstroke">
+          <ul id="pager"></ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JSCRIPT -->
+  <script src="assets/js/jquery-1.10.2.min.js"></script>
+  <script src="assets/js/jquery.cycle2.min.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Giuseppe Garbin">
+    <title>Demo 1 - Slidesow responsive con JQuery Cycle 2</title>
+
+    <!-- DEMO TEMPLATE STYLE -->
+    <link href="assets/css/demo.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- CSS -->
+    <style type="text/css">
+
+    /* IMPOSTAZIONI PAGINA DEMO  */
+    body { background: #913D88; color: #FFFFFF; text-align: center;}
+    .navigation { margin:50px 0;  padding:0; font-size: 1.25em; text-align: center; }
+    ul.navigation { list-style:none; }
+    ul.navigation li { display:inline; padding:0 20px 0 0; }
+    ul.navigation li:last-child { padding-right:0; }
+    ul.navigation li a { color:#FFFFFF; text-decoration:none; padding: 10px 25px; border: 1px solid #fff; border-radius: 2px; }
+    ul.navigation li a:hover { background-color:#ffffff; color:#000000; }
+
+    /* SLIDESHOW CONTAINER */
+    .slide-show-container {
+      position: relative;
+      margin: 50px auto;
+      height: 400px;
+      width: 940px;
+    }
+    .slide-show-container .cycle-slideshow {
+      height: 400px;
+      width: 100%;
+    }
+    .slide-show-container .cycle-slideshow .slide {
+      height: 450px;
+      width: 100%;
+      background-repeat:no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      -webkit-background-size: cover;
+         -moz-background-size: cover;
+           -o-background-size: cover;
+              background-size: cover;
+    }
+
+    /* BTN SLIDE PRECEDENTE E SUCCESSIVA */
+    #next-slide,
+    #prev-slide {
+      height: 40px;
+      width: 40px;
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      background: url('assets/img/sprite-arrows.png') no-repeat;
+      z-index: 999;
+    }
+    #next-slide {
+      right: 20px;
+      background-position: -40px 0px;
+    }
+    #prev-slide {
+      left: 20px;
+      background-position: 0px 0px;
+    }
+    #next-slide:hover { background-position: -40px -40px; }
+    #prev-slide:hover { background-position: 0px -40px; }
+  </style>
+
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Slidesow responsive con JQuery Cycle 2</h1>
+        <h4>Demo 1 - by <a href="http://www.giuseppegarbin.com">Giuseppe Garbin</a></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="slide-show-container">
+          <div class="cycle-slideshow"
+            data-cycle-fx="scrollHorz"
+            data-cycle-pause-on-hover="false"
+            data-cycle-speed="200"
+            data-cycle-prev="#prev-slide"
+            data-cycle-next="#next-slide"
+            data-cycle-swipe="true"
+            >
+             <img src="assets/img/01.jpg" alt="Leone by Giuseppe Garbin">
+             <img src="assets/img/02.jpg" alt="Rinoceronte by Giuseppe Garbin">
+             <img src="assets/img/03.jpg" alt="Bufalo by Giuseppe Garbin">
+             <img src="assets/img/04.jpg" alt="Kudu by Giuseppe Garbin">
+          </div><!-- eo: .slide-show -->
+            <div id="prev-slide"></div>
+            <div id="next-slide"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+
+  <!-- JSCRIPT -->
+  <script src="assets/js/jquery-1.10.2.min.js"></script>
+  <script src="assets/js/jquery.cycle2.min.js"></script>
+
+  </body>
+</html>
